@@ -2,6 +2,18 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import Sheet from '../models/Sheet';
 import AuthDocService from '../services/AuthDocService';
 import ReadSheetService from '../services/ReadSheetService';
+import WriteSheetService from '../services/WriteSheetService';
+
+interface ColumnsValues {
+    column: string;
+    value: string;
+}
+
+interface alterRequest {
+    sheetIndex: number; 
+    rowIndex: number;
+    columnsValues: Array<ColumnsValues>;
+}
 
 interface authRequest {
     doc: GoogleSpreadsheet;
@@ -66,8 +78,16 @@ class SheetRepository {
 
     }
 
-    public alter() {
-        
+    public async alter({ sheetIndex, rowIndex, columnsValues }: alterRequest) {
+        const writer = new WriteSheetService();
+
+        const row = await writer.execute({ doc: this.doc, 
+            sheetIndex, 
+            rowIndex, 
+            columnsValues 
+        });
+
+        return row;
     }
 }
 
