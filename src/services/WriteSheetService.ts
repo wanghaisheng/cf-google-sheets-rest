@@ -1,4 +1,5 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
+import RemoveMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
 
 interface ColumnsValues {
     column: string;
@@ -28,25 +29,9 @@ class WriteSheetService {
         });
         await row.save();
         
-        const removerMetaDatasAndCircularStructure = () => {
-            const visited = new WeakSet();
-            return (key: any, value: any) => {
-                if (key == "_sheet" || key == "_rowNumber" || key == "_rawData") {
-                    return undefined
-                }
-                if (typeof value === "object" && value !== null) {
-                    if (visited.has(value)) return;
-                    visited.add(value);
-                }
-                return value;
-            };
-        };
+        const handler = new RemoveMetaDataAndCircularStructureServiceService();
 
-        const stringJson = JSON.stringify(row, removerMetaDatasAndCircularStructure());
-
-        const objectJson = JSON.parse(stringJson);
-
-        return objectJson;
+        const objectJson = handler.execute({ object: row });
 
         return objectJson;
     }

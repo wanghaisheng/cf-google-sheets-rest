@@ -1,4 +1,5 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
+import RemoveMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
 
 interface requestDTO {
     doc: GoogleSpreadsheet;
@@ -14,23 +15,9 @@ class ReadSheetService {
 
         const rows = await sheet.getRows();
 
-        const removerMetaDatasAndCircularStructure = () => {
-            const visited = new WeakSet();
-            return (key: any, value: any) => {
-                if (key == "_sheet" || key == "_rowNumber" || key == "_rawData") {
-                    return undefined
-                }
-                if (typeof value === "object" && value !== null) {
-                    if (visited.has(value)) return;
-                    visited.add(value);
-                }
-                return value;
-            };
-        };
+        const handler = new RemoveMetaDataAndCircularStructureServiceService();
 
-        const stringJson = JSON.stringify(rows, removerMetaDatasAndCircularStructure());
-
-        const objectJson = JSON.parse(stringJson);
+        const objectJson = handler.execute({ object: rows });
 
         return objectJson;
     }
