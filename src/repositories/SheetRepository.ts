@@ -1,8 +1,19 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import Sheet from '../models/Sheet';
+import AddRowSheetService from '../services/AddRowSheetService';
 import AuthDocService from '../services/AuthDocService';
 import ReadSheetService from '../services/ReadSheetService';
 import WriteSheetService from '../services/WriteSheetService';
+
+interface addRequest {
+    sheetIndex: number;
+    rowValues: Array<(
+        | {
+            [header: string]: string | number | boolean;
+        }
+        | Array<string | number | boolean>
+    )>,
+}
 
 interface ColumnsValues {
     column: string;
@@ -70,8 +81,15 @@ class SheetRepository {
         return sheet;
     }
 
-    public add() {
+    public async add({ sheetIndex, rowValues }: addRequest) {
+        const adder = new AddRowSheetService();
 
+        const rows = await adder.execute({ doc: this.doc, 
+            sheetIndex, 
+            rowValues,
+        });
+
+        return rows;
     }
 
     public drop() {
