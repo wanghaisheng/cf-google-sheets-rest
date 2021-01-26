@@ -61,9 +61,9 @@ class SheetRepository {
         this.authentication({ doc: this.doc, auth });
     }
 
-    private async authentication({ doc, auth }: authRequest) {
-        const authService = new AuthDocService();
-        await authService.execute({ doc, auth });
+    private async authentication({ doc, auth: { client_email, private_key } }: authRequest) {
+        const authService = new AuthDocService({ doc });
+        await authService.execute({ client_email, private_key });
     }
 
     public async all(): Promise<Sheet[]> {
@@ -80,9 +80,9 @@ class SheetRepository {
     }
 
     public async find(sheetIndex: number): Promise<Sheet> {
-        const reader = new ReadSheetService();
+        const reader = new ReadSheetService({ doc: this.doc });
 
-        const data = await reader.execute({ doc: this.doc, sheetIndex });
+        const data = await reader.execute({ sheetIndex });
 
         const sheet = new Sheet({ index: sheetIndex, data });
 
@@ -90,9 +90,9 @@ class SheetRepository {
     }
 
     public async add({ sheetIndex, rowValues }: addRequest): Promise<Object> {
-        const adder = new AddRowsSheetService();
+        const adder = new AddRowsSheetService({ doc: this.doc });
 
-        const rows = await adder.execute({ doc: this.doc, 
+        const rows = await adder.execute({
             sheetIndex, 
             rowValues,
         });
@@ -101,9 +101,9 @@ class SheetRepository {
     }
 
     public async drop({ sheetIndex, rowIndex }: dropRequest): Promise<Object> {
-        const deleter = new DeleteRowSheetService();
+        const deleter = new DeleteRowSheetService({ doc: this.doc });
 
-        const row = await deleter.execute({ doc: this.doc, 
+        const row = await deleter.execute({ 
             sheetIndex, 
             rowIndex: indexConverter.execute(rowIndex), 
         });
@@ -112,9 +112,9 @@ class SheetRepository {
     }
 
     public async alter({ sheetIndex, rowIndex, columnsValues }: alterRequest): Promise<Object> {
-        const alter = new AlterRowSheetService();
+        const alter = new AlterRowSheetService({ doc: this.doc });
 
-        const row = await alter.execute({ doc: this.doc, 
+        const row = await alter.execute({ 
             sheetIndex, 
             rowIndex: indexConverter.execute(rowIndex), 
             columnsValues 

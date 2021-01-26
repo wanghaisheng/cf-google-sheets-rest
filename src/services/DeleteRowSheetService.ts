@@ -1,18 +1,27 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import removeMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
 
-interface requestDTO {
+interface constructorDTO {
     doc: GoogleSpreadsheet;
+}
+
+interface requestDTO {
     sheetIndex: number;
     rowIndex: number;
 }
 
 class DeleteRowSheetService {
+
+    private doc: GoogleSpreadsheet;
+
+    constructor({ doc }: constructorDTO) {
+        this.doc = doc;
+    }
     
-    public async execute ({ doc, sheetIndex, rowIndex }: requestDTO): Promise<Object> {
-        await doc.loadInfo();
+    public async execute ({ sheetIndex, rowIndex }: requestDTO): Promise<Object> {
+        await this.doc.loadInfo();
         
-        const sheet = doc.sheetsByIndex[sheetIndex];
+        const sheet = this.doc.sheetsByIndex[sheetIndex];
 
         const rows = await sheet.getRows();
 

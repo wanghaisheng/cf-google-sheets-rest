@@ -1,27 +1,31 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-interface authData {
+interface constructorDTO {
+    doc: GoogleSpreadsheet;
+}
+
+interface requestDTO {
     client_email: string;
     
     private_key: string;
 }
 
-interface requestDTO {
-    doc: GoogleSpreadsheet;
-
-    auth: authData;
-}
-
 class AuthDocService {
-    
-    public async execute ({ doc, auth: { client_email, private_key } }: requestDTO): Promise<GoogleSpreadsheet> {
 
-        await doc.useServiceAccountAuth({
+    private doc: GoogleSpreadsheet;
+
+    constructor({ doc }: constructorDTO) {
+        this.doc = doc;
+    }
+    
+    public async execute ({ client_email, private_key }: requestDTO): Promise<GoogleSpreadsheet> {
+
+        await this.doc.useServiceAccountAuth({
             client_email: client_email,
             private_key: private_key,
         });
 
-        return doc;
+        return this.doc;
     }
 }
 

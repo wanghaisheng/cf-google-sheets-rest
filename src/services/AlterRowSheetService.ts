@@ -1,24 +1,33 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import removeMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
 
+interface constructorDTO {
+    doc: GoogleSpreadsheet;
+}
+
 interface ColumnsValues {
     column: string;
     value: string;
 }
 
 interface requestDTO {
-    doc: GoogleSpreadsheet;
     sheetIndex: number;
     rowIndex: number;
     columnsValues: Array<ColumnsValues>;
 }
 
 class AlterRowSheetService {
+
+    private doc: GoogleSpreadsheet;
+
+    constructor({ doc }: constructorDTO) {
+        this.doc = doc;
+    }
     
-    public async execute ({ doc, sheetIndex, rowIndex, columnsValues }: requestDTO): Promise<Object> {
-        await doc.loadInfo();
+    public async execute ({ sheetIndex, rowIndex, columnsValues }: requestDTO): Promise<Object> {
+        await this.doc.loadInfo();
         
-        const sheet = doc.sheetsByIndex[sheetIndex];
+        const sheet = this.doc.sheetsByIndex[sheetIndex];
 
         const rows = await sheet.getRows();
 
