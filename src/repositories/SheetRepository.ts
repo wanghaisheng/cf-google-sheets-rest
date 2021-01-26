@@ -89,7 +89,7 @@ class SheetRepository {
         return sheet;
     }
 
-    public async add({ sheetIndex, rowValues }: addRequest) {
+    public async add({ sheetIndex, rowValues }: addRequest): Promise<Object> {
         const adder = new AddRowSheetService();
 
         const rows = await adder.execute({ doc: this.doc, 
@@ -100,7 +100,7 @@ class SheetRepository {
         return rows;
     }
 
-    public async drop({ sheetIndex, rowIndex }: dropRequest) {
+    public async drop({ sheetIndex, rowIndex }: dropRequest): Promise<Object> {
         const deleter = new DeleteRowSheetService();
 
         const row = await deleter.execute({ doc: this.doc, 
@@ -111,7 +111,7 @@ class SheetRepository {
         return row;
     }
 
-    public async alter({ sheetIndex, rowIndex, columnsValues }: alterRequest) {
+    public async alter({ sheetIndex, rowIndex, columnsValues }: alterRequest): Promise<Object> {
         const writer = new WriteSheetService();
 
         const row = await writer.execute({ doc: this.doc, 

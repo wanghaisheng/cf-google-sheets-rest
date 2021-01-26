@@ -14,7 +14,7 @@ interface requestDTO {
 
 class AddRowSheetService {
     
-    public async execute ({ doc, sheetIndex, rowValues }: requestDTO)/*: Promise<Object>*/ {
+    public async execute ({ doc, sheetIndex, rowValues }: requestDTO): Promise<Object> {
         await doc.loadInfo();
         
         const sheet = doc.sheetsByIndex[sheetIndex];

@@ -15,7 +15,7 @@ interface requestDTO {
 
 class WriteSheetService {
     
-    public async execute ({ doc, sheetIndex, rowIndex, columnsValues }: requestDTO)/*: Promise<Object>*/ {
+    public async execute ({ doc, sheetIndex, rowIndex, columnsValues }: requestDTO): Promise<Object> {
         await doc.loadInfo();
         
         const sheet = doc.sheetsByIndex[sheetIndex];

@@ -1,5 +1,5 @@
 class IndexConverter {
-    execute(index: number) {
+    execute(index: number): number {
         if (index < 2) {
             throw Error('This index cannot be less than 2');
         }
