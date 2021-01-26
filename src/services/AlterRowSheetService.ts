@@ -9,11 +9,11 @@ interface ColumnsValues {
 interface requestDTO {
     doc: GoogleSpreadsheet;
     sheetIndex: number;
-    rowIndex: number /*| null*/;
+    rowIndex: number;
     columnsValues: Array<ColumnsValues>;
 }
 
-class WriteSheetService {
+class AlterRowSheetService {
     
     public async execute ({ doc, sheetIndex, rowIndex, columnsValues }: requestDTO): Promise<Object> {
         await doc.loadInfo();
@@ -37,4 +37,4 @@ class WriteSheetService {
     }
 }
 
-export default WriteSheetService;
+export default AlterRowSheetService;

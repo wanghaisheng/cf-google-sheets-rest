@@ -1,11 +1,11 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import Sheet from '../models/Sheet';
-import AddRowSheetService from '../services/AddRowSheetService';
+import AddRowsSheetService from '../services/AddRowsSheetService';
 import AuthDocService from '../services/AuthDocService';
 import DeleteRowSheetService from '../services/DeleteRowSheetService';
 import indexConverter from '../services/IndexConverter';
 import ReadSheetService from '../services/ReadSheetService';
-import WriteSheetService from '../services/WriteSheetService';
+import AlterRowSheetService from '../services/AlterRowSheetService';
 
 
 interface dropRequest {
@@ -90,7 +90,7 @@ class SheetRepository {
     }
 
     public async add({ sheetIndex, rowValues }: addRequest): Promise<Object> {
-        const adder = new AddRowSheetService();
+        const adder = new AddRowsSheetService();
 
         const rows = await adder.execute({ doc: this.doc, 
             sheetIndex, 
@@ -112,9 +112,9 @@ class SheetRepository {
     }
 
     public async alter({ sheetIndex, rowIndex, columnsValues }: alterRequest): Promise<Object> {
-        const writer = new WriteSheetService();
+        const alter = new AlterRowSheetService();
 
-        const row = await writer.execute({ doc: this.doc, 
+        const row = await alter.execute({ doc: this.doc, 
             sheetIndex, 
             rowIndex: indexConverter.execute(rowIndex), 
             columnsValues 

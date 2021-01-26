@@ -4,7 +4,7 @@ import RemoveMetaDataAndCircularStructureServiceService from './RemoveMetaDataAn
 interface requestDTO {
     doc: GoogleSpreadsheet;
     sheetIndex: number;
-    rowIndex: number /*| null*/;
+    rowIndex: number;
 }
 
 class DeleteRowSheetService {

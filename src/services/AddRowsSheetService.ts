@@ -12,7 +12,7 @@ interface requestDTO {
     )>,
 }
 
-class AddRowSheetService {
+class AddRowsSheetService {
     
     public async execute ({ doc, sheetIndex, rowValues }: requestDTO): Promise<Object> {
         await doc.loadInfo();
@@ -29,4 +29,4 @@ class AddRowSheetService {
     }
 }
 
-export default AddRowSheetService;
+export default AddRowsSheetService;
