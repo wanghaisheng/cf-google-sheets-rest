@@ -2,8 +2,15 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import Sheet from '../models/Sheet';
 import AddRowSheetService from '../services/AddRowSheetService';
 import AuthDocService from '../services/AuthDocService';
+import DeleteRowSheetService from '../services/DeleteRowSheetService';
 import ReadSheetService from '../services/ReadSheetService';
 import WriteSheetService from '../services/WriteSheetService';
+
+
+interface dropRequest {
+    sheetIndex: number; 
+    rowIndex: number;
+}
 
 interface addRequest {
     sheetIndex: number;
@@ -92,8 +99,15 @@ class SheetRepository {
         return rows;
     }
 
-    public drop() {
+    public async drop({ sheetIndex, rowIndex }: dropRequest) {
+        const deleter = new DeleteRowSheetService();
 
+        const row = await deleter.execute({ doc: this.doc, 
+            sheetIndex, 
+            rowIndex, 
+        });
+
+        return row;
     }
 
     public async alter({ sheetIndex, rowIndex, columnsValues }: alterRequest) {

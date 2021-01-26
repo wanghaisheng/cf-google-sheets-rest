@@ -100,4 +100,30 @@ routeSheet.patch('/sheets/:index', async (request, response) => {
     response.json({ row });
 });
 
+routeSheet.delete('/sheets/:index', async (request, response) => {
+    const {
+        sheetId,
+        client_email,
+        private_key,
+        rowIndex,
+    } = request.body;
+
+    const { index } = request.params;
+
+    const sheetRepository = new SheetRepository({
+        sheetId,
+        auth: {
+            client_email,
+            private_key,
+        }
+    });
+
+    const row = await sheetRepository.drop({ 
+        sheetIndex: Number(index), 
+        rowIndex,
+    });
+
+    response.json({ row });
+});
+
 export default routeSheet;
