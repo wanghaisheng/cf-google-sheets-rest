@@ -30,4 +30,5 @@ class RemoveMetaDataAndCircularStructureServiceService {
     };
 }
 
-export default RemoveMetaDataAndCircularStructureServiceService;
+const removerMetaDatasAndCircularStructure = new RemoveMetaDataAndCircularStructureServiceService();
+export default removerMetaDatasAndCircularStructure;

@@ -1,5 +1,5 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import RemoveMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
+import removeMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
 
 interface requestDTO {
     doc: GoogleSpreadsheet;
@@ -19,10 +19,9 @@ class DeleteRowSheetService {
         const row = rows[rowIndex];
 
         await row.delete();
-        
-        const handler = new RemoveMetaDataAndCircularStructureServiceService();
 
-        const objectJson = handler.execute({ object: row });
+        const objectJson = removeMetaDataAndCircularStructureServiceService
+                            .execute({ object: row });
 
         return objectJson;
     }

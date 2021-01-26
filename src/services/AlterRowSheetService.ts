@@ -1,5 +1,5 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import RemoveMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
+import removeMetaDataAndCircularStructureServiceService from './RemoveMetaDataAndCircularStructureServiceService';
 
 interface ColumnsValues {
     column: string;
@@ -29,9 +29,8 @@ class AlterRowSheetService {
         });
         await row.save();
         
-        const handler = new RemoveMetaDataAndCircularStructureServiceService();
-
-        const objectJson = handler.execute({ object: row });
+        const objectJson = removeMetaDataAndCircularStructureServiceService
+                            .execute({ object: row });
 
         return objectJson;
     }
