@@ -3,6 +3,7 @@ import Sheet from '../models/Sheet';
 import AddRowSheetService from '../services/AddRowSheetService';
 import AuthDocService from '../services/AuthDocService';
 import DeleteRowSheetService from '../services/DeleteRowSheetService';
+import indexConverter from '../services/IndexConverter';
 import ReadSheetService from '../services/ReadSheetService';
 import WriteSheetService from '../services/WriteSheetService';
 
@@ -104,7 +105,7 @@ class SheetRepository {
 
         const row = await deleter.execute({ doc: this.doc, 
             sheetIndex, 
-            rowIndex, 
+            rowIndex: indexConverter.execute(rowIndex), 
         });
 
         return row;
@@ -115,7 +116,7 @@ class SheetRepository {
 
         const row = await writer.execute({ doc: this.doc, 
             sheetIndex, 
-            rowIndex, 
+            rowIndex: indexConverter.execute(rowIndex), 
             columnsValues 
         });
 
