@@ -42,7 +42,7 @@ Lists all spreadsheets in the document.
 ```json
 {
     "client_email": "someGoogleServiceAccount@gserviceaccount.com",
-	  "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n"
+    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n"
 }
 ```
 
