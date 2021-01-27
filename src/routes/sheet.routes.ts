@@ -3,15 +3,16 @@ import SheetRepository from '../repositories/SheetRepository';
 
 const routeSheet = Router();
 
-routeSheet.get('/sheets', async (request, response) => {
+routeSheet.get('/sheets/:docId', async (request, response) => {
     const {
-        sheetId,
         client_email,
         private_key,
     } = request.body;
 
+    const { docId } = request.params;
+
     const sheetRepository = new SheetRepository({
-        sheetId,
+        docId,
         auth: {
             client_email,
             private_key,
@@ -23,17 +24,16 @@ routeSheet.get('/sheets', async (request, response) => {
     response.json({ sheets });
 });
 
-routeSheet.get('/sheets/:index', async (request, response) => {
+routeSheet.get('/sheets/:docId/:index', async (request, response) => {
     const {
-        sheetId,
         client_email,
         private_key,
     } = request.body;
 
-    const { index } = request.params;
+    const { docId, index } = request.params;
 
     const sheetRepository = new SheetRepository({
-        sheetId,
+        docId,
         auth: {
             client_email,
             private_key,
@@ -45,7 +45,7 @@ routeSheet.get('/sheets/:index', async (request, response) => {
     response.json({ sheets });
 });
 
-routeSheet.post('/sheets/:index', async (request, response) => {
+routeSheet.post('/sheets/:docId/:index', async (request, response) => {
     const {
         sheetId,
         client_email,
@@ -53,10 +53,10 @@ routeSheet.post('/sheets/:index', async (request, response) => {
         rowValues,
     } = request.body;
 
-    const { index } = request.params;
+    const { docId, index } = request.params;
 
     const sheetRepository = new SheetRepository({
-        sheetId,
+        docId,
         auth: {
             client_email,
             private_key,
@@ -71,19 +71,18 @@ routeSheet.post('/sheets/:index', async (request, response) => {
     response.json({ row });
 });
 
-routeSheet.patch('/sheets/:index', async (request, response) => {
+routeSheet.patch('/sheets/:docId/:index', async (request, response) => {
     const {
-        sheetId,
         client_email,
         private_key,
         rowIndex,
         columnsValues,
     } = request.body;
 
-    const { index } = request.params;
+    const { docId, index } = request.params;
 
     const sheetRepository = new SheetRepository({
-        sheetId,
+        docId,
         auth: {
             client_email,
             private_key,
@@ -99,7 +98,7 @@ routeSheet.patch('/sheets/:index', async (request, response) => {
     response.json({ row });
 });
 
-routeSheet.delete('/sheets/:index', async (request, response) => {
+routeSheet.delete('/sheets/:docId/:index', async (request, response) => {
     const {
         sheetId,
         client_email,
@@ -107,10 +106,10 @@ routeSheet.delete('/sheets/:index', async (request, response) => {
         rowIndex,
     } = request.body;
 
-    const { index } = request.params;
+    const { docId, index } = request.params;
 
     const sheetRepository = new SheetRepository({
-        sheetId,
+        docId,
         auth: {
             client_email,
             private_key,

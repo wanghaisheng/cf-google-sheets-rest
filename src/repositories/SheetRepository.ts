@@ -47,7 +47,7 @@ interface authData {
 }
 
 interface requestDTO {
-    sheetId: string;
+    docId: string;
     
     auth: authData;
 }
@@ -56,8 +56,8 @@ class SheetRepository {
 
     doc: GoogleSpreadsheet;
 
-    constructor({ sheetId, auth }: requestDTO) {
-        this.doc = new GoogleSpreadsheet(sheetId);
+    constructor({ docId, auth }: requestDTO) {
+        this.doc = new GoogleSpreadsheet(docId);
         this.authentication({ doc: this.doc, auth });
     }
 
