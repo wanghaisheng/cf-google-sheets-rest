@@ -40,14 +40,13 @@ routeSheet.get('/sheets/:docId/:index', async (request, response) => {
         }
     });
 
-    const sheets = await sheetRepository.find(Number(index));
+    const sheet = await sheetRepository.find(Number(index));
 
-    response.json({ sheets });
+    response.json({ sheet });
 });
 
 routeSheet.post('/sheets/:docId/:index', async (request, response) => {
     const {
-        sheetId,
         client_email,
         private_key,
         rowValues,
@@ -63,12 +62,12 @@ routeSheet.post('/sheets/:docId/:index', async (request, response) => {
         }
     });
 
-    const row = await sheetRepository.add({ 
+    const rows = await sheetRepository.add({ 
         sheetIndex: Number(index), 
         rowValues
     });
 
-    response.json({ row });
+    response.json({ rows });
 });
 
 routeSheet.patch('/sheets/:docId/:index', async (request, response) => {
@@ -89,13 +88,13 @@ routeSheet.patch('/sheets/:docId/:index', async (request, response) => {
         }
     });
 
-    const row = await sheetRepository.alter({ 
+    const rows = await sheetRepository.alter({ 
         sheetIndex: Number(index), 
         rowIndex, 
         columnsValues,
     });
 
-    response.json({ row });
+    response.json({ rows });
 });
 
 routeSheet.delete('/sheets/:docId/:index', async (request, response) => {
