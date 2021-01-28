@@ -10,10 +10,10 @@
 |             method           |             url             |               description              |
 |:-----------------------------|:----------------------------|:---------------------------------------|
 | `get`                        | /sheets/:docId              | Lists all spreadsheets in the document |
-| `get`                        | /sheets/:docId/:index       |
-| `post`                       | /sheets/:docId/:index       |
-| `patch`                      | /sheets/:docId/:index       |
-| `delete`                     | /sheets/:docId/:index       |
+| `get`                        | /sheets/:docId/:index       | Lists one spreadsheets in the document |
+| `post`                       | /sheets/:docId/:index       | Add one row in the spreadsheet         |
+| `patch`                      | /sheets/:docId/:index       | Update one row in the spreadsheet      |
+| `delete`                     | /sheets/:docId/:index       | Delete one row in the spreadsheet      |
 
 
 ## List
@@ -104,3 +104,239 @@ Lists all spreadsheets in the document.
 }
 ```
 -->
+
+## Find
+
+Lists one spreadsheets in the document.
+
+**URL** : `/sheets/:docId/:index`
+
+**Method** : `GET`
+
+**URL params**: 
+```
+:docId -> [ID obtained from the google spreadsheet URL]
+:index -> [spreadsheet index]
+```
+
+**URL params example**: `/sheets/3yFTzSjpJlpyeLywd1ygY5MiG853f4PBnfaMtrZ63P/0`
+
+**Data params**:
+
+```json
+{
+    "client_email": "[google service account email]",
+    "private_key": "[private key of the google service account]"
+}
+```
+
+**Data params example**:
+
+```json
+{
+    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n"
+}
+```
+
+### Success Response
+
+**Code** : `200 OK`
+
+**Content example**:
+
+```json
+{  
+  "sheet": {
+    "index": 0,
+    "data": [
+      {
+        "name": "Isaac",
+        "age": "25",
+        "birth day": "25/12/1995"
+      },
+      {
+        "name": "lavinia",
+        "age": "20",
+        "birth day": "23/08/2000"
+      }
+    ]
+  }
+}
+```
+
+## Add
+
+Add one row in the spreadsheet.
+
+**URL** : `/sheets/:docId/:index`
+
+**Method** : `POST`
+
+**URL params**: 
+```
+:docId -> [ID obtained from the google spreadsheet URL]
+:index -> [spreadsheet index]
+```
+
+**URL params example**: `/sheets/3yFTzSjpJlpyeLywd1ygY5MiG853f4PBnfaMtrZ63P/0`
+
+**Data params**:
+
+```json
+{
+    "client_email": "[google service account email]",
+    "private_key": "[private key of the google service account]",
+    "rowValues": [
+    {"[column name]": "[value]", "[column name]": [value]},
+    {"[column name]": "[value]", "[column name]": [value]}
+  ]
+}
+```
+
+**Data params example**:
+
+```json
+{
+    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n",
+    "rowValues": [
+    {"name": "Dilma", "age": 53},
+    {"name": "Pedro", "age": 56}
+  ]
+}
+```
+
+### Success Response
+
+**Code** : `200 OK`
+
+**Content example**:
+
+```json
+{  
+  "rows": [
+    {
+      "name": "dilma",
+      "age": "53"
+    },
+    {
+      "name": "pedro",
+      "age": "56"
+    }
+  ]
+}
+```
+
+## Alter
+
+Update one row in the spreadsheet.
+
+**URL** : `/sheets/:docId/:index`
+
+**Method** : `PATCH`
+
+**URL params**: 
+```
+:docId -> [ID obtained from the google spreadsheet URL]
+:index -> [spreadsheet index]
+```
+
+**URL params example**: `/sheets/3yFTzSjpJlpyeLywd1ygY5MiG853f4PBnfaMtrZ63P/0`
+
+**Data params**:
+
+```json
+{
+    "client_email": "[google service account email]",
+    "private_key": "[private key of the google service account]",
+    "rowIndex": [row index],
+    "columnsValues": [
+      {"column": "[column name]", "value": "[new value]"},
+      {"column": "[column name]", "value": "[new value]"}
+    ]
+}
+```
+
+**Data params example**:
+
+```json
+{
+    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n",
+    "rowIndex": 2,
+    "columnsValues": [
+      {"column": "name", "value": "Isaac Allef"},
+      {"column": "age", "value": "26"}
+    ]
+}
+```
+
+### Success Response
+
+**Code** : `200 OK`
+
+**Content example**:
+
+```json
+{  
+  "rows": {
+    "name": "Isaac Allef",
+    "age": "26",
+    "birth day": "25/12/1995"
+  }
+}
+```
+
+## Drop
+
+Delete one row in the spreadsheet.
+
+**URL** : `/sheets/:docId/:index`
+
+**Method** : `PATCH`
+
+**URL params**: 
+```
+:docId -> [ID obtained from the google spreadsheet URL]
+:index -> [spreadsheet index]
+```
+
+**URL params example**: `/sheets/3yFTzSjpJlpyeLywd1ygY5MiG853f4PBnfaMtrZ63P/0`
+
+**Data params**:
+
+```json
+{
+    "client_email": "[google service account email]",
+    "private_key": "[private key of the google service account]",
+    "rowIndex": [row index]
+}
+```
+
+**Data params example**:
+
+```json
+{
+    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n",
+    "rowIndex": 2
+}
+```
+
+### Success Response
+
+**Code** : `200 OK`
+
+**Content example**:
+
+```json
+{  
+  "row": {
+    "name": "Isaac",
+    "age": "25",
+    "birth day": "25/12/1995",
+    "_deleted": true
+  }
+}
+```
