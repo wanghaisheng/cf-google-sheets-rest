@@ -1,4 +1,8 @@
-# cms-sheets
+<p align="left">
+   <img src="public/google-sheets-logo.png" width="400"/>
+</p>
+
+# CMS-Sheets
 ----
   It's a simple API RESTful to manipulate a google spreadsheet document.<br>
   In order use it, it's necessary to have somethings:
