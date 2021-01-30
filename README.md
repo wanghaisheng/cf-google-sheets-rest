@@ -9,15 +9,52 @@
   - A google service account and your credentials;
   - A google spreadsheet document shared with your google service accout and it ID, got it from URL
 
+
+## :rocket: Technologies
+
+This project was developed with the following technologies:
+
+-  [NodeJS](https://nodejs.org/en/)
+-  [Typescript](https://www.typescriptlang.org/)
+-  [Typeorm](https://typeorm.io/#/)
+-  [Google-spreadsheet](https://www.npmjs.com/package/google-spreadsheet)
+-  [VS Code][vc]
+
+## 📋 Features
+
+### Documentation
+
+- [x] Lists all spreadsheets in the document
+- [x] Lists one spreadsheets in the document
+- [x] Add one row in the spreadsheet
+- [x] Update one row in the spreadsheet
+- [x] Delete one row in the spreadsheet
+
+## :information_source: How To Use
+
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js v12.20.0][nodejs] or higher + [Yarn 1.22.5][yarn] or higher installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/isaac-allef/cms-sheets.git
+
+# Go into the repository
+$ cd cms-sheets
+
+# Install dependencies and run it
+$ yarn install
+$ yarn dev:server
+```
+
 ## Routes
 
-|             method           |             url             |               description              |
-|:-----------------------------|:----------------------------|:---------------------------------------|
-| `get`                        | /sheets/:docId              | Lists all spreadsheets in the document |
-| `get`                        | /sheets/:docId/:index       | Lists one spreadsheets in the document |
-| `post`                       | /sheets/:docId/:index       | Add one row in the spreadsheet         |
-| `patch`                      | /sheets/:docId/:index       | Update one row in the spreadsheet      |
-| `delete`                     | /sheets/:docId/:index       | Delete one row in the spreadsheet      |
+|             method           |               url               |               description              |
+|:-----------------------------|:--------------------------------|:---------------------------------------|
+| `get`                        | [/sheets/:docId](#list)         | Lists all spreadsheets in the document |
+| `get`                        | [/sheets/:docId/:index](#find)  | Lists one spreadsheets in the document |
+| `post`                       | [/sheets/:docId/:index](#add)   | Add one row in the spreadsheet         |
+| `patch`                      | [/sheets/:docId/:index](#alter) | Update one row in the spreadsheet      |
+| `delete`                     | [/sheets/:docId/:index](#drop)  | Delete one row in the spreadsheet      |
 
 
 ## List
@@ -344,3 +381,13 @@ Delete one row in the spreadsheet.
   }
 }
 ```
+## :memo: License
+This project is under the MIT license. See the [LICENSE](LICENSE) for more information.
+
+---
+
+Made with ♥ by Isaac Allef :wave:
+
+[nodejs]: https://nodejs.org/
+[yarn]: https://yarnpkg.com/
+[vc]: https://code.visualstudio.com/
