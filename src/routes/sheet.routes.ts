@@ -1,13 +1,13 @@
 import { Router } from 'express';
+import ensureConfiguration from '../middlewares/ensureConfiguration';
 import SheetRepository from '../repositories/SheetRepository';
 
 const routeSheet = Router();
 
+routeSheet.use(ensureConfiguration);
+
 routeSheet.get('/sheets/:docId', async (request, response) => {
-    const {
-        client_email,
-        private_key,
-    } = request.body;
+    const { client_email, private_key } = request.config;
 
     const { docId } = request.params;
 
@@ -25,10 +25,7 @@ routeSheet.get('/sheets/:docId', async (request, response) => {
 });
 
 routeSheet.get('/sheets/:docId/:index', async (request, response) => {
-    const {
-        client_email,
-        private_key,
-    } = request.body;
+    const { client_email, private_key } = request.config;
 
     const { docId, index } = request.params;
 
@@ -46,11 +43,9 @@ routeSheet.get('/sheets/:docId/:index', async (request, response) => {
 });
 
 routeSheet.post('/sheets/:docId/:index', async (request, response) => {
-    const {
-        client_email,
-        private_key,
-        rowValues,
-    } = request.body;
+    const { client_email, private_key } = request.config;
+    
+    const { rowValues } = request.body;
 
     const { docId, index } = request.params;
 
@@ -71,12 +66,9 @@ routeSheet.post('/sheets/:docId/:index', async (request, response) => {
 });
 
 routeSheet.patch('/sheets/:docId/:index', async (request, response) => {
-    const {
-        client_email,
-        private_key,
-        rowIndex,
-        columnsValues,
-    } = request.body;
+    const {  client_email, private_key } = request.config;
+
+    const { rowIndex, columnsValues } = request.body;
 
     const { docId, index } = request.params;
 
@@ -98,12 +90,9 @@ routeSheet.patch('/sheets/:docId/:index', async (request, response) => {
 });
 
 routeSheet.delete('/sheets/:docId/:index', async (request, response) => {
-    const {
-        sheetId,
-        client_email,
-        private_key,
-        rowIndex,
-    } = request.body;
+    const { client_email, private_key } = request.config;
+
+    const { sheetId, rowIndex } = request.body;
 
     const { docId, index } = request.params;
 
