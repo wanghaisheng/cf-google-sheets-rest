@@ -56,6 +56,22 @@ $ yarn dev:server
 | `patch`                      | [/sheets/:docId/:index](#alter) | Update one row in the spreadsheet      |
 | `delete`                     | [/sheets/:docId/:index](#drop)  | Delete one row in the spreadsheet      |
 
+**All routes need this headers**:
+```json
+{
+    "client_email": "[google service account email]",
+    "private_key": "[private key of the google service account]"
+}
+```
+
+**Example**:
+
+```json
+{
+    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n"
+}
+```
 
 ## List
 
@@ -69,23 +85,6 @@ Lists all spreadsheets in the document.
 
 **URL params example**: `/sheets/3yFTzSjpJlpyeLywd1ygY5MiG853f4PBnfaMtrZ63P`
 
-**Data params**:
-
-```json
-{
-    "client_email": "[google service account email]",
-    "private_key": "[private key of the google service account]"
-}
-```
-
-**Data params example**:
-
-```json
-{
-    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n"
-}
-```
 
 ### Success Response
 
@@ -162,23 +161,6 @@ Lists one spreadsheets in the document.
 
 **URL params example**: `/sheets/3yFTzSjpJlpyeLywd1ygY5MiG853f4PBnfaMtrZ63P/0`
 
-**Data params**:
-
-```json
-{
-    "client_email": "[google service account email]",
-    "private_key": "[private key of the google service account]"
-}
-```
-
-**Data params example**:
-
-```json
-{
-    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n"
-}
-```
 
 ### Success Response
 
@@ -226,8 +208,6 @@ Add one row in the spreadsheet.
 
 ```json
 {
-    "client_email": "[google service account email]",
-    "private_key": "[private key of the google service account]",
     "rowValues": [
     {"[column name]": "[value]", "[column name]": [value]},
     {"[column name]": "[value]", "[column name]": [value]}
@@ -239,8 +219,6 @@ Add one row in the spreadsheet.
 
 ```json
 {
-    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n",
     "rowValues": [
     {"name": "Dilma", "age": 53},
     {"name": "Pedro", "age": 56}
@@ -289,8 +267,6 @@ Update one row in the spreadsheet.
 
 ```json
 {
-    "client_email": "[google service account email]",
-    "private_key": "[private key of the google service account]",
     "rowIndex": [row index],
     "columnsValues": [
       {"column": "[column name]", "value": "[new value]"},
@@ -303,8 +279,6 @@ Update one row in the spreadsheet.
 
 ```json
 {
-    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n",
     "rowIndex": 2,
     "columnsValues": [
       {"column": "name", "value": "Isaac Allef"},
@@ -349,8 +323,6 @@ Delete one row in the spreadsheet.
 
 ```json
 {
-    "client_email": "[google service account email]",
-    "private_key": "[private key of the google service account]",
     "rowIndex": [row index]
 }
 ```
@@ -359,8 +331,6 @@ Delete one row in the spreadsheet.
 
 ```json
 {
-    "client_email": "someGoogleServiceAccount@gserviceaccount.com",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nRANDOM_STRING\n-----END PRIVATE KEY-----\n",
     "rowIndex": 2
 }
 ```
