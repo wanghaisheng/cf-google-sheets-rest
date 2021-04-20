@@ -17,17 +17,20 @@ class ReadSheetService {
         this.doc = doc;
     }
     
-    public async execute ({ sheetIndex }: requestDTO): Promise<Object> {
+    public async execute ({ sheetIndex }: requestDTO): Promise<[string[], Object]> {
         await this.doc.loadInfo();
         
         const sheet = this.doc.sheetsByIndex[sheetIndex];
+
+        await sheet.loadHeaderRow()
+        const columnsNames = sheet.headerValues;
 
         const rows = await sheet.getRows();
 
         const objectJson = removeMetaDataAndCircularStructureServiceService
                             .execute({ object: rows });
 
-        return objectJson;
+        return [columnsNames, objectJson];
     }
 }
 

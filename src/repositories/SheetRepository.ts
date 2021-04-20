@@ -82,9 +82,9 @@ class SheetRepository {
     public async find(sheetIndex: number): Promise<Sheet> {
         const reader = new ReadSheetService({ doc: this.doc });
 
-        const data = await reader.execute({ sheetIndex });
+        const [columnsNames, data] = await reader.execute({ sheetIndex });
 
-        const sheet = new Sheet({ index: sheetIndex, data });
+        const sheet = new Sheet({ index: sheetIndex, columnsNames, data });
 
         return sheet;
     }
