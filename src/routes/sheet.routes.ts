@@ -21,6 +21,8 @@ routeSheet.get('/sheets/:docId', async (request, response) => {
 
     const sheets = await sheetRepository.all();
 
+    response.set('X-Total-Count', sheets.length.toString());
+
     response.json({ sheets });
 });
 
@@ -38,6 +40,8 @@ routeSheet.get('/sheets/:docId/:index', async (request, response) => {
     });
 
     const sheet = await sheetRepository.find(Number(index));
+
+    response.set('X-Total-Count', Object.keys(sheet.data).length.toString());
 
     response.json({ sheet });
 });
