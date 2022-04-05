@@ -1,0 +1,11 @@
+{
+        "name": "google-Sheets-rest",
+        "description": "It's a simple API RESTful to manipulate a google spreadsheet document",
+        "keywords": ["heroku yes"],
+        "website": "https://github.com/wanghaisheng/cf-google-sheets-rest",
+        "repository": "https://github.com/wanghaisheng/cf-google-sheets-rest",
+        "stack": "heroku-20"    
+    }
+    
+
+   

@@ -2,12 +2,23 @@
    <img src="public/google-sheets-logo.png" width="400"/>
 </p>
 
-# CMS-Sheets
+# google-Sheets-rest
 ----
   It's a simple API RESTful to manipulate a google spreadsheet document.<br>
   In order use it, it's necessary to have somethings:
   - A google service account and your credentials;
   - A google spreadsheet document shared with your google service accout and it ID, got it from URL
+
+
+
+# heroku 
+
+
+
+# cf worker
+
+https://cf-google-sheets-rest.v2ray-tokyo.workers.dev
+
 
 
 ## :rocket: Technologies
@@ -84,7 +95,7 @@ Lists all spreadsheets in the document.
 **URL params**: `:docId -> [ID obtained from the google spreadsheet URL]`
 
 **URL params example**: `/sheets/3yFTzSjpJlpyeLywd1ygY5MiG853f4PBnfaMtrZ63P`
-
+<!-- spreadsheets/d/1cJvEzvraIyyVDOELsCW6dL774XgBPC-epkUDvLJj74w/ -->
 
 ### Success Response
 

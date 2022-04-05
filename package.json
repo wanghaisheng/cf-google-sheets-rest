@@ -1,12 +1,13 @@
 {
-  "name": "cms-sheets",
+  "name": "google-Sheets-rest",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/isaac-allef/cms-sheets.git",
+  "repository": "https://github.com/wanghaisheng/cf-google-sheets-rest",
   "author": "Isaac Allef <isaac_allef@hotmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "start": "node dist/server.js",
     "dev:server": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "devDependencies": {
