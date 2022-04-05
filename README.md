@@ -15,6 +15,8 @@
 
 
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wanghaisheng/cf-google-sheets-rest/tree/main)
+
 # cf worker
 
 https://cf-google-sheets-rest.v2ray-tokyo.workers.dev

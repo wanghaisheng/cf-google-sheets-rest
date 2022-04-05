@@ -4,7 +4,7 @@
         "keywords": ["heroku yes"],
         "website": "https://github.com/wanghaisheng/cf-google-sheets-rest",
         "repository": "https://github.com/wanghaisheng/cf-google-sheets-rest",
-        "stack": "heroku-20"    
+        "stack": "container"    
     }
     
 
